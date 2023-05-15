@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./FoxWithButtons.scss";
 import DateAndClock from "../DateAndClock/DateAndClock";
+import Weather from "../Weather/Weather";
 
 function FoxWithButtons() {
   const [foxImage, setFoxImage] = useState();
@@ -27,6 +28,7 @@ function FoxWithButtons() {
       console.log(error);
     }
   };
+  console.log(pholosophy)
 
   useEffect(() => {
     getRandomImage();
@@ -37,15 +39,18 @@ function FoxWithButtons() {
     <div>
       <div>
         <DateAndClock />
+        <Weather/>
       </div>
       <div className="fox">
         <img src={foxImage} alt="" />
         <button onClick={getRandomImage}>DEĞİŞTİR</button>
         <div>
-          {pholosophy.map((content, index) => (
+          {pholosophy.map((content) => (
             <>
-              <p>{content.quote}</p>
-              <h5 key={index}>{content.author}</h5>
+              <div key={content.id}>
+                <p>{content.quote}</p>
+                <h5>{content.author}</h5>
+              </div>
             </>
           ))}
         </div>
