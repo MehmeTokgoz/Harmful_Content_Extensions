@@ -41,7 +41,7 @@ import { useState } from "react";
         console.log(error);
       }
     }
-    const tableHeadCells = allData.map(headCell)
+    const tableHeadCells = allData.map((headCell)=>(<>{headCell.id}</>))
   };
 
   getHarmfulContentInfo();
