@@ -1,16 +1,15 @@
 import "./App.scss";
 import FoxWithButtons from "./components/FoxAndButtons/FoxWithButtons";
-import HarmfulContentInfo from "./components/UsomDatas/HarmfulContentInfo";
-import EnhancedTable from "./components/UsomDatas/HarmfulContentTable";
+import HarmfulContentTable from "./components/UsomDatas/HarmfulContentTable";
+import IPRangeGenerator from "./ipAddressGenerator/IPRangeGenerator";
 
 function App() {
   return (
     <>
       <div>
         <FoxWithButtons />
-        <EnhancedTable />
-        <HarmfulContentInfo />
-
+        <HarmfulContentTable />
+        <IPRangeGenerator />
       </div>
     </>
   );
