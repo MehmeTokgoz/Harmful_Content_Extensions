@@ -54,6 +54,7 @@ function HarmfulContentTable() {
     setHundredItem(allData);
     setIsLoading(false);
   };
+  console.log(hundredItem)
 
   useEffect(() => {
     getHarmfulContentInfo();
@@ -311,7 +312,6 @@ function HarmfulContentTable() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - hundredItem.length) : 0;
 
-  /////////BUTTON FOR EVERY CONTENT////////////
 
   const handleShowInfo = async (url) => {
     try {
@@ -324,6 +324,9 @@ function HarmfulContentTable() {
       console.log(error);
     }
   };
+
+
+
 
   return (
     <Box className="main-table-container" >

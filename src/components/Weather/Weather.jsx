@@ -20,7 +20,7 @@ function Weather() {
         <div className="weather-info-container" key={index}>
           <h5 className="weather-city-name">{weatherDatas.data.name}</h5>
           <p className="weather-temp">{weatherDatas.data.main.temp} °C</p>
-          <p className="waather-description">{weatherDatas.data.weather[0].description[0].toUpperCase() + weatherDatas.data.weather[0].description.substr(1)}</p>
+          <p className="weather-description">{weatherDatas.data.weather[0].description[0].toUpperCase() + weatherDatas.data.weather[0].description.substr(1)}</p>
           {/* <img src={`https://openweathermap.org/img/wn/${weatherDatas.data.weather[0].icon}@2x.png`} alt="" /> */}
         </div>
       ))}

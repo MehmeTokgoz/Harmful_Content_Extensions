@@ -1,3 +1,6 @@
+
+
+
 .fox-container {
   display: flex;
   flex-direction: column;
@@ -11,10 +14,13 @@
   width: 89%;
   height: 50px;
   padding: 10px 0;
-  background-color: #f0f0f0;
+  background-color: #03045e;
   border-radius: 4px;
   margin-bottom: 10px;
   box-sizing: border-box;
+  color: white;
+  font-family: "Lato";
+
 }
 
 .weather {
@@ -53,7 +59,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #f0f0f0;
-  opacity: 0.5;
+  opacity: 0.4;
   width: 100%;
   height: 100%;
 }
@@ -66,6 +72,7 @@
     left: 5%;
     transform: translate(-50%, -50%);
     z-index: 1;
+    background-color:#023e8a;
 }
 
 .change-quote-button {
@@ -74,7 +81,8 @@
     position: absolute;
     top: 0%;
     right: -5%;
-    transform: translate(-50%, -50%);  
+    transform: translate(-50%, -50%); 
+    background-color:#023e8a; 
 }
 
 .quote {
@@ -82,7 +90,7 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3rem;
+  font-size: 2.2rem;
   margin-bottom: 10px;
   border-radius: 4px;
 }

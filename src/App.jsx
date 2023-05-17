@@ -30,13 +30,13 @@ function App() {
         {showChartForAdresses && <ChartForAdresses />}
         <div className="main-contents-buttons">
           {
-            <button className="buttons table-button" onClick={handleTableButtonClick}>
+            <button id="button-1" className="buttons table-button" onClick={handleTableButtonClick}>
               ZARARLI İÇERİKLER TABLOSU
             </button>
           }
-          {<button className="buttons ip-button" onClick={handleIPRangeButtonClick}>IP SORGULA</button>}
+          {<button id="button-2" className="buttons ip-button" onClick={handleIPRangeButtonClick}>IP SORGULA</button>}
           {
-            <button className="buttons chart-button" onClick={handleChartButtonClick}>
+            <button id="button-3" className="buttons chart-button" onClick={handleChartButtonClick}>
               UZANTI VE AÇIKLAMALARA GÖRE GRAFİK
             </button>
           }

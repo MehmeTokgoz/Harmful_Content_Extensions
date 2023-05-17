@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Lato:ital,wght@0,300;0,400;1,300;1,400&family=Manrope:wght@200;400&family=Montserrat:ital,wght@0,300;0,400;1,300;1,400&family=Roboto:ital,wght@0,300;1,300;1,400&display=swap');
+
 #root {
   width: 100%;
   margin: 0;
@@ -33,5 +35,7 @@
   @extend .table-button
 }
 
-
+#button-1, #button-2, #button-3 {
+  background-color:#023e8a;
+}
 
