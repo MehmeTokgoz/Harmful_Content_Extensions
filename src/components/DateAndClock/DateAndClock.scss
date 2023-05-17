@@ -1,0 +1,18 @@
+.date-clock-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    // margin-top: auto;
+    padding: 1%;
+  }
+  
+  .date-info,
+  .clock-info {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 10px;
+    margin: auto;
+  }
+  

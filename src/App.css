@@ -1,6 +1,25 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-contents-buttons {
+  position: absolute;
+  margin-top: 10px;
+  text-align: center;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+
+.table-button, .chart-button, .ip-button {
+  margin: 0 5%;
 }/*# sourceMappingURL=App.css.map */

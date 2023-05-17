@@ -28,18 +28,19 @@ function App() {
         {showHarmfulContentTable && <HarmfulContentTable />}
         {showIPRangeGenerator && <IPRangeGenerator />}
         {showChartForAdresses && <ChartForAdresses />}
-
-        {
-          <button onClick={handleTableButtonClick}>
-            ZARARLI İÇERİKLER TABLOSU
-          </button>
-        }
-        {<button onClick={handleIPRangeButtonClick}>IP SORGULA</button>}
-        {
-          <button onClick={handleChartButtonClick}>
-            UZANTI VE AÇIKLAMALARA GÖRE GRAFİK
-          </button>
-        }
+        <div className="main-contents-buttons">
+          {
+            <button className="buttons table-button" onClick={handleTableButtonClick}>
+              ZARARLI İÇERİKLER TABLOSU
+            </button>
+          }
+          {<button className="buttons ip-button" onClick={handleIPRangeButtonClick}>IP SORGULA</button>}
+          {
+            <button className="buttons chart-button" onClick={handleChartButtonClick}>
+              UZANTI VE AÇIKLAMALARA GÖRE GRAFİK
+            </button>
+          }
+        </div>
       </div>
     </>
   );

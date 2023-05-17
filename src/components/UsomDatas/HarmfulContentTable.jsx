@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import "./HarmfulContentTable.scss";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -147,10 +148,11 @@ function HarmfulContentTable() {
     };
 
     return (
-      <TableHead>
+      <TableHead className="harmful-content-table-head">
         <TableRow>
           <TableCell padding="checkbox">
             <Checkbox
+            className="harmful-content-table-head-cell"
               color="primary"
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={rowCount > 0 && numSelected === rowCount}
@@ -162,6 +164,7 @@ function HarmfulContentTable() {
           </TableCell>
           {headCells.map((headCell) => (
             <TableCell
+            className="harmful-content-table-head-cell"
               key={headCell.id}
               align={headCell.numeric ? "right" : "left"}
               padding={headCell.disablePadding ? "none" : "normal"}
@@ -322,14 +325,12 @@ function HarmfulContentTable() {
     }
   };
 
-  ////////////////////////////////////////////
-
   return (
-    <Box sx={{ width: "100%" }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+    <Box className="main-table-container" >
+      <Paper className="main-table-paper" >
+        <EnhancedTableToolbar numSelected={selected.length}/>
         <TableContainer>
-          <Table
+          <Table className="harmful-content-table"
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
@@ -342,7 +343,7 @@ function HarmfulContentTable() {
               onRequestSort={handleRequestSort}
               rowCount={hundredItem.length}
             />
-            <TableBody>
+            <TableBody className="harmful-content-table-body">
               {visibleRows.map((row, index) => {
                 const isItemSelected = isSelected(row.url);
                 const labelId = `enhanced-table-checkbox-${index}`;
@@ -357,6 +358,7 @@ function HarmfulContentTable() {
                     key={row.url}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
+                    className={`harmful-content-table-row ${isItemSelected ? "harmful-content-table-row-selected" : ""}`}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
@@ -365,6 +367,7 @@ function HarmfulContentTable() {
                         inputProps={{
                           "aria-labelledby": labelId,
                         }}
+                        className="harmful-content-table-body-cell"
                       />
                     </TableCell>
                     <TableCell
@@ -372,17 +375,22 @@ function HarmfulContentTable() {
                       id={labelId}
                       scope="row"
                       padding="none"
+                      className="harmful-content-table-body-cell"
                     >
                       {row.url}
                     </TableCell>
-                    <TableCell align="right">{row.date}</TableCell>
-                    <TableCell align="right">{row.criticality_level}</TableCell>
-                    <TableCell align="right">{row.desc}</TableCell>
-                    <TableCell align="right">{row.source}</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="right"
+                    className="harmful-content-table-body-cell"
+                    >{row.date}
+                    </TableCell>
+                    <TableCell className="harmful-content-table-body-cell"align="right">{row.criticality_level}</TableCell>
+                    <TableCell className="harmful-content-table-body-cell" align="right">{row.desc}</TableCell>
+                    <TableCell className="harmful-content-table-body-cell" align="right">{row.source}</TableCell>
+                    <TableCell className="harmful-content-table-body-cell" align="right">
                       <Button
                         variant="outlined"
                         onClick={() => handleShowInfo(row.url)}
+                        id="button-show-info"
                       >
                         Bilgileri Göster
                       </Button>

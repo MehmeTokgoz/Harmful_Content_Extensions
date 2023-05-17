@@ -1,0 +1,47 @@
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .chart-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .main-pie-chart {
+    width: 300px;
+    height: 300px;
+    margin-top: 20px;
+  }
+  
+  .pie {
+    transition: fill 0.3s ease;
+  }
+  
+  .pie:hover {
+    fill: #0056b3;
+  }
+  
+  .chart-tooltip {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .custom-tooltip p {
+    margin: 5px 0;
+    color: #ffffff;
+  }
+  
+.chart-title {
+    background-color: #ffffff;
+    width: 50%;
+    margin: 20px;
+    margin-bottom: 0px;
+    border: 1px solid #ddd;
+    box-shadow: 5px 5px grey;
+    font-size: 24px;
+}  

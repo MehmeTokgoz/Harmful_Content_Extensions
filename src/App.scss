@@ -10,5 +10,28 @@
   flex-direction: column;
 }
 
+.main-contents-buttons {
+  position: absolute;
+  margin-top: 10px;
+  text-align: center;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  
+}
+
+.table-button {
+  margin: 0 5%;
+}
+
+.ip-button {
+  @extend .table-button
+}
+
+.chart-button {
+  @extend .table-button
+}
+
 
 
