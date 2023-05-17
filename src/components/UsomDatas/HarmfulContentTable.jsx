@@ -58,7 +58,7 @@ function HarmfulContentTable() {
 
   useEffect(() => {
     getHarmfulContentInfo();
-  }, []);
+  },[]);
 
   const visibleRows = useMemo(
     () =>
@@ -203,7 +203,6 @@ function HarmfulContentTable() {
 
   function EnhancedTableToolbar(props) {
     const { numSelected } = props;
-
     return (
       <Toolbar
         sx={{
@@ -225,7 +224,7 @@ function HarmfulContentTable() {
             variant="subtitle1"
             component="div"
           >
-            {numSelected} selected
+            {numSelected} Selected
           </Typography>
         ) : (
           <Typography

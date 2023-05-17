@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.scss";
 import FoxWithButtons from "./components/FoxAndButtons/FoxWithButtons";
 import HarmfulContentTable from "./components/UsomDatas/HarmfulContentTable";
@@ -13,30 +13,54 @@ function App() {
 
   const handleTableButtonClick = () => {
     setShowHarmfulContentTable(!showHarmfulContentTable);
+    setShowIPRangeGenerator(false);
+    setShowChartForAdresses(false);
   };
   const handleIPRangeButtonClick = () => {
     setShowIPRangeGenerator(!showIPRangeGenerator);
+    setShowHarmfulContentTable(false);
+    setShowChartForAdresses(false);
   };
   const handleChartButtonClick = () => {
     setShowChartForAdresses(!showChartForAdresses);
+    setShowIPRangeGenerator(false);
+    setShowHarmfulContentTable(false);
   };
 
   return (
     <>
       <div className="container">
         <FoxWithButtons />
-        {showHarmfulContentTable && <HarmfulContentTable />}
+        {showHarmfulContentTable && (
+          <HarmfulContentTable />
+        )}
         {showIPRangeGenerator && <IPRangeGenerator />}
         {showChartForAdresses && <ChartForAdresses />}
         <div className="main-contents-buttons">
           {
-            <button id="button-1" className="buttons table-button" onClick={handleTableButtonClick}>
+            <button
+              id="button-1"
+              className="buttons table-button"
+              onClick={handleTableButtonClick}
+            >
               ZARARLI İÇERİKLER TABLOSU
             </button>
           }
-          {<button id="button-2" className="buttons ip-button" onClick={handleIPRangeButtonClick}>IP SORGULA</button>}
           {
-            <button id="button-3" className="buttons chart-button" onClick={handleChartButtonClick}>
+            <button
+              id="button-2"
+              className="buttons ip-button"
+              onClick={handleIPRangeButtonClick}
+            >
+              IP SORGULA
+            </button>
+          }
+          {
+            <button
+              id="button-3"
+              className="buttons chart-button"
+              onClick={handleChartButtonClick}
+            >
               UZANTI VE AÇIKLAMALARA GÖRE GRAFİK
             </button>
           }

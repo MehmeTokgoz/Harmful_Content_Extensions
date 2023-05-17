@@ -13,7 +13,7 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div className="custom-tooltip">
         {/* eslint-disable-next-line react/prop-types*/}
-        <p >Uzantı: .{data.extension}</p>
+        <p>Uzantı: .{data.extension}</p>
         {/* eslint-disable-next-line react/prop-types*/}
         <p>Açıklama: {data.desc}</p>
       </div>
@@ -75,12 +75,12 @@ function ChartForAdresses() {
   return (
     <>
       <div className="chart-container">
-        <h2 className="chart-title">Harmful Content by Extensions</h2>
-        <PieChart className="main-pie-chart" width={600} height={450}>
+        <h2 className="chart-title">Uzantılarına Göre Zararlı İçerikler</h2>
+        <PieChart className="main-pie-chart" width={600} height={500}>
           <Pie
             className="pie"
             dataKey="count"
-            isAnimationActive={false}
+            isAnimationActive={true}
             data={chartData}
             cx="50%"
             cy="50%"
@@ -88,8 +88,13 @@ function ChartForAdresses() {
             label
           />
           {chartData.map((entry, index) => (
-    <Cell key={`cell-${index}`} fill={`#${index.toString(16)}${index.toString(16)}${index.toString(16)}`} />
-  ))}
+            <Cell
+              key={`cell-${index}`}
+              fill={`#${index.toString(16)}${index.toString(
+                16
+              )}${index.toString(16)}`}
+            />
+          ))}
           <Tooltip content={<CustomTooltip />} />
         </PieChart>
       </div>
