@@ -23,7 +23,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="container">
         <FoxWithButtons />
         {showHarmfulContentTable && <HarmfulContentTable />}
         {showIPRangeGenerator && <IPRangeGenerator />}

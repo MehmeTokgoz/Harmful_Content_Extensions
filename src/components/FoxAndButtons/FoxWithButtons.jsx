@@ -36,25 +36,25 @@ function FoxWithButtons() {
   }, []);
 
   return (
-    <div>
-      <div>
+    <div className="fox-container">
+      <div className="date-clock">
         <DateAndClock />
-        <Weather/>
+        <Weather className="weather"/>
       </div>
       <div className="fox">
-        <img src={foxImage} alt="" />
-        <button onClick={getRandomImage}>DEĞİŞTİR</button>
+        <img className="fox-image" src={foxImage} alt="" />
+        <button className="buttons" onClick={getRandomImage}>DEĞİŞTİR</button>
         <div>
           {pholosophy.map((content) => (
             <>
-              <div key={content.id}>
-                <p>{content.quote}</p>
-                <h5>{content.author}</h5>
+              <div className= "quote-container" key={content.id}>
+                <p className="quote">{content.quote}</p>
+                <h5 className="author">{content.author}</h5>
               </div>
             </>
           ))}
         </div>
-        <button onClick={getStoaPhlosophy}>DEĞİŞTİR FELSEFE</button>
+        <button className="buttons" onClick={getStoaPhlosophy}>DEĞİŞTİR FELSEFE</button>
       </div>
     </div>
   );

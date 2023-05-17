@@ -3,35 +3,38 @@ import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-  TableSortLabel,
-} from "@mui/material";
-import {
-  Toolbar,
-  Typography,
-  Paper,
-  Checkbox,
-  IconButton,
-  Tooltip,
-  FormControlLabel,
-  Switch,
-} from "@mui/material";
-import { DeleteIcon, FilterListIcon } from "@mui/icons-material";
+import Box from "@mui/material/Box";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Checkbox from "@mui/material/Checkbox";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 import { Button } from "@mui/material";
 
 function HarmfulContentTable() {
   const [hundredItem, setHundredItem] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("date");
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [dense, setDense] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  useEffect(() => {
   const getHarmfulContentInfo = async () => {
     const totalPages = 6;
     const allData = [];
@@ -48,9 +51,26 @@ function HarmfulContentTable() {
       }
     }
     setHundredItem(allData);
+    setIsLoading(false);
   };
+
+  useEffect(() => {
     getHarmfulContentInfo();
   }, []);
+
+  const visibleRows = useMemo(
+    () =>
+      stableSort(hundredItem, getComparator(order, orderBy)).slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [order, orderBy, page, rowsPerPage]
+  );
+
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Veri çekilirken "Loading..." mesajını göster
+  }
 
   function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -235,13 +255,6 @@ function HarmfulContentTable() {
     numSelected: PropTypes.number.isRequired,
   };
 
-  const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("date");
-  const [selected, setSelected] = useState([]);
-  const [page, setPage] = useState(0);
-  const [dense, setDense] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
@@ -295,14 +308,7 @@ function HarmfulContentTable() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - hundredItem.length) : 0;
 
-  const visibleRows = useMemo(
-    () =>
-      stableSort(hundredItem, getComparator(order, orderBy)).slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      ),
-    [order, orderBy, page, rowsPerPage]
-  );
+  /////////BUTTON FOR EVERY CONTENT////////////
 
   const handleShowInfo = async (url) => {
     try {
@@ -315,6 +321,8 @@ function HarmfulContentTable() {
       console.log(error);
     }
   };
+
+  ////////////////////////////////////////////
 
   return (
     <Box sx={{ width: "100%" }}>
