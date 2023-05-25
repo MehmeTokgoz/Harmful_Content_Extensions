@@ -311,17 +311,15 @@ function HarmfulContentTable() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - hundredItem.length) : 0;
 
 
-  const handleShowInfo = async (url) => {
-    try {
-      const response = await axios.get(
-        `https://api.ip2whois.com/v2?key=0607942437A13C55233425498F4F2AFD&domain=${url}`
-      );
-      const data =(response.data);
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    const handleShowInfo = async (url) => {
+      try {
+        const response = await axios.get(`/api?key=0607942437A13C55233425498F4F2AFD&domain=${url}`);
+        const data = response.data;
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
 
   // const handleShowInfo = async (url) => {
