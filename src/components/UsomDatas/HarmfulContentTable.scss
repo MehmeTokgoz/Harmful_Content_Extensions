@@ -17,14 +17,21 @@
   .harmful-content-table {
     border-collapse: collapse;
     background-color: #dddfe6;
+
   }
   
   .harmful-content-table-head {
-    background-color:#0077b6;
+    background-color: #023e8a !important;
+    // background-color:#0077b6;
   }
   
   .harmful-content-table-head-cell {
     font-weight: bold;
+  }
+
+  #harmful-content-table-head-cells {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   .harmful-content-table-row {
@@ -34,7 +41,7 @@
   
   
   .harmful-content-table-row-selected {
-    background-color: #023e8a !important;
+    background-color:#0077b6;
     color: #fff;
   }
   

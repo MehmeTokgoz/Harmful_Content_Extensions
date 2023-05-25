@@ -202,6 +202,7 @@ function HarmfulContentTable() {
           </TableCell>
           {headCells.map((headCell) => (
             <TableCell
+            id="harmful-content-table-head-cells"
               className="harmful-content-table-head-cell"
               key={headCell.id}
               align={headCell.numeric ? "right" : "left"}
@@ -283,18 +284,16 @@ function HarmfulContentTable() {
           </Typography>
         )}
 
-        {numSelected > 0 ? (
+        {numSelected > 0 && !showDetails ? (
           <Tooltip title="Delete">
             <IconButton>
               <DeleteIcon />
             </IconButton>
           </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton>
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
+        ) : showDetails ? null : (
+          <IconButton>
+            <FilterListIcon />
+          </IconButton>
         )}
       </Toolbar>
     );
