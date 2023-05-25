@@ -36,6 +36,9 @@ function HarmfulContentTable() {
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
+  const [details, setDetails] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
+
   const getHarmfulContentInfo = async () => {
     const totalPages = 6;
     const allData = [];
@@ -310,29 +313,20 @@ function HarmfulContentTable() {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - hundredItem.length) : 0;
 
+  const handleShowInfo = async (url) => {
+    try {
+      setShowDetails(true);
+      const response = await axios.get(
+        `/api?key=0607942437A13C55233425498F4F2AFD&domain=${url}`
+      );
+      const data = response.data;
+      setDetails([data]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const handleShowInfo = async (url) => {
-      try {
-        const response = await axios.get(`/api?key=0607942437A13C55233425498F4F2AFD&domain=${url}`);
-        const data = response.data;
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-
-  // const handleShowInfo = async (url) => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://api.ip2whois.com/v2?key=0607942437A13C55233425498F4F2AFD&domain=${url}`
-  //     );
-  //     const data = response.data;
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  console.log(details.map((item)=>item.registrant.phone))
 
   return (
     <Box className="main-table-container">
@@ -354,82 +348,152 @@ function HarmfulContentTable() {
               rowCount={hundredItem.length}
             />
             <TableBody className="harmful-content-table-body">
-              {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.url);
-                const labelId = `enhanced-table-checkbox-${index}`;
-
-                return (
-                  <TableRow
-                    hover
-                    onClick={(event) => handleClick(event, row.url)}
-                    role="checkbox"
-                    aria-checked={isItemSelected}
-                    tabIndex={-1}
-                    key={row.url}
-                    selected={isItemSelected}
-                    sx={{ cursor: "pointer" }}
-                    className={`harmful-content-table-row ${
-                      isItemSelected ? "harmful-content-table-row-selected" : ""
-                    }`}
-                  >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          "aria-labelledby": labelId,
-                        }}
-                        className="harmful-content-table-body-cell"
-                      />
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      id={labelId}
-                      scope="row"
-                      padding="none"
-                      className="harmful-content-table-body-cell"
-                    >
-                      {row.url}
-                    </TableCell>
-                    <TableCell
-                      align="right"
-                      className="harmful-content-table-body-cell"
-                    >
-                      {row.date}
-                    </TableCell>
-                    <TableCell
-                      className="harmful-content-table-body-cell"
-                      align="right"
-                    >
-                      {row.criticality_level}
-                    </TableCell>
-                    <TableCell
-                      className="harmful-content-table-body-cell"
-                      align="right"
-                    >
-                      {row.desc}
-                    </TableCell>
-                    <TableCell
-                      className="harmful-content-table-body-cell"
-                      align="right"
-                    >
-                      {row.source}
-                    </TableCell>
-                    <TableCell
-                      className="harmful-content-table-body-cell"
-                      align="right"
-                    >
-                      <Button
-                        variant="outlined"
-                        onClick={() => handleShowInfo(row.url)}
-                        id="button-show-info"
+              {showDetails
+                ? details.map((detail, index) => {
+                    const isItemSelected = isSelected(detail.registrant.name);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) =>
+                          handleClick(event, detail.registrant.name)
+                        }
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={detail.billing.domain_id}
+                        selected={isItemSelected}
+                        sx={{ cursor: "pointer" }}
+                        className={`harmful-content-table-row ${
+                          isItemSelected
+                            ? "harmful-content-table-row-selected"
+                            : ""
+                        }`}
                       >
-                        Bilgileri Göster
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            color="primary"
+                            checked={isItemSelected}
+                            inputProps={{
+                              "aria-labelledby": labelId,
+                            }}
+                            className="harmful-content-table-body-cell"
+                          />
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                          className="harmful-content-table-body-cell"
+                        >
+                          {detail.billing.domain}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          className="harmful-content-table-body-cell"
+                        >
+                          {detail.registrant.city}
+                        </TableCell>
+                        <TableCell
+                          className="harmful-content-table-body-cell"
+                          align="right"
+                        >
+                          {detail.registrant.country}
+                        </TableCell>
+                        <TableCell
+                          className="harmful-content-table-body-cell"
+                          align="right"
+                        >
+                          {detail.registrant.email}
+                        </TableCell>
+                        <TableCell
+                          className="harmful-content-table-body-cell"
+                          align="right"
+                        >
+                          {detail.registrant.phone}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+                : visibleRows.map((row, index) => {
+                    const isItemSelected = isSelected(row.url);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.url)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.url}
+                        selected={isItemSelected}
+                        sx={{ cursor: "pointer" }}
+                        className={`harmful-content-table-row ${
+                          isItemSelected
+                            ? "harmful-content-table-row-selected"
+                            : ""
+                        }`}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            color="primary"
+                            checked={isItemSelected}
+                            inputProps={{
+                              "aria-labelledby": labelId,
+                            }}
+                            className="harmful-content-table-body-cell"
+                          />
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                          className="harmful-content-table-body-cell"
+                        >
+                          {row.url}
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          className="harmful-content-table-body-cell"
+                        >
+                          {row.date}
+                        </TableCell>
+                        <TableCell
+                          className="harmful-content-table-body-cell"
+                          align="right"
+                        >
+                          {row.criticality_level}
+                        </TableCell>
+                        <TableCell
+                          className="harmful-content-table-body-cell"
+                          align="right"
+                        >
+                          {row.desc}
+                        </TableCell>
+                        <TableCell
+                          className="harmful-content-table-body-cell"
+                          align="right"
+                        >
+                          {row.source}
+                        </TableCell>
+                        <TableCell
+                          className="harmful-content-table-body-cell"
+                          align="right"
+                        >
+                          <Button
+                            variant="outlined"
+                            onClick={() => handleShowInfo(row.url)}
+                            id="button-show-info"
+                          >
+                            Bilgileri Göster
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               {emptyRows > 0 && (
                 <TableRow
                   style={{
