@@ -54,11 +54,11 @@ function HarmfulContentTable() {
     setHundredItem(allData);
     setIsLoading(false);
   };
-  console.log(hundredItem)
+  console.log(hundredItem);
 
   useEffect(() => {
     getHarmfulContentInfo();
-  },[]);
+  }, []);
 
   const visibleRows = useMemo(
     () =>
@@ -68,7 +68,6 @@ function HarmfulContentTable() {
       ),
     [order, orderBy, page, rowsPerPage]
   );
-
 
   if (isLoading) {
     return <div>Loading...</div>; // Veri çekilirken "Loading..." mesajını göster
@@ -153,7 +152,7 @@ function HarmfulContentTable() {
         <TableRow>
           <TableCell padding="checkbox">
             <Checkbox
-            className="harmful-content-table-head-cell"
+              className="harmful-content-table-head-cell"
               color="primary"
               indeterminate={numSelected > 0 && numSelected < rowCount}
               checked={rowCount > 0 && numSelected === rowCount}
@@ -165,7 +164,7 @@ function HarmfulContentTable() {
           </TableCell>
           {headCells.map((headCell) => (
             <TableCell
-            className="harmful-content-table-head-cell"
+              className="harmful-content-table-head-cell"
               key={headCell.id}
               align={headCell.numeric ? "right" : "left"}
               padding={headCell.disablePadding ? "none" : "normal"}
@@ -317,7 +316,7 @@ function HarmfulContentTable() {
       const response = await axios.get(
         `https://api.ip2whois.com/v2?key=0607942437A13C55233425498F4F2AFD&domain=${url}`
       );
-      const data = response.data;
+      const data =(response.data);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -325,14 +324,25 @@ function HarmfulContentTable() {
   };
 
 
-
+  // const handleShowInfo = async (url) => {
+  //   try {
+  //     const response = await axios.get(
+  //       `https://api.ip2whois.com/v2?key=0607942437A13C55233425498F4F2AFD&domain=${url}`
+  //     );
+  //     const data = response.data;
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
-    <Box className="main-table-container" >
-      <Paper className="main-table-paper" >
-        <EnhancedTableToolbar numSelected={selected.length}/>
+    <Box className="main-table-container">
+      <Paper className="main-table-paper">
+        <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
-          <Table className="harmful-content-table"
+          <Table
+            className="harmful-content-table"
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
@@ -360,7 +370,9 @@ function HarmfulContentTable() {
                     key={row.url}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
-                    className={`harmful-content-table-row ${isItemSelected ? "harmful-content-table-row-selected" : ""}`}
+                    className={`harmful-content-table-row ${
+                      isItemSelected ? "harmful-content-table-row-selected" : ""
+                    }`}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
@@ -381,14 +393,34 @@ function HarmfulContentTable() {
                     >
                       {row.url}
                     </TableCell>
-                    <TableCell align="right"
-                    className="harmful-content-table-body-cell"
-                    >{row.date}
+                    <TableCell
+                      align="right"
+                      className="harmful-content-table-body-cell"
+                    >
+                      {row.date}
                     </TableCell>
-                    <TableCell className="harmful-content-table-body-cell"align="right">{row.criticality_level}</TableCell>
-                    <TableCell className="harmful-content-table-body-cell" align="right">{row.desc}</TableCell>
-                    <TableCell className="harmful-content-table-body-cell" align="right">{row.source}</TableCell>
-                    <TableCell className="harmful-content-table-body-cell" align="right">
+                    <TableCell
+                      className="harmful-content-table-body-cell"
+                      align="right"
+                    >
+                      {row.criticality_level}
+                    </TableCell>
+                    <TableCell
+                      className="harmful-content-table-body-cell"
+                      align="right"
+                    >
+                      {row.desc}
+                    </TableCell>
+                    <TableCell
+                      className="harmful-content-table-body-cell"
+                      align="right"
+                    >
+                      {row.source}
+                    </TableCell>
+                    <TableCell
+                      className="harmful-content-table-body-cell"
+                      align="right"
+                    >
                       <Button
                         variant="outlined"
                         onClick={() => handleShowInfo(row.url)}
