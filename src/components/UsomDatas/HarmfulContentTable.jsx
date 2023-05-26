@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import "./HarmfulContentTable.scss";
-import Box from "@mui/material/Box";
+
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,6 +14,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import { Button } from "@mui/material";
+import Box from "@mui/material/Box";
 
 import EnhancedTableHead from "./EnhancedTableHead";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
@@ -163,71 +164,6 @@ function HarmfulContentTable() {
         },
         {},
       ];
-
-  // function EnhancedTableToolbar(props) {
-  //   const { numSelected } = props;
-  //   return (
-  //     <Toolbar
-  //       sx={{
-  //         pl: { sm: 2 },
-  //         pr: { xs: 1, sm: 1 },
-  //         ...(numSelected > 0 && {
-  //           bgcolor: (theme) =>
-  //             alpha(
-  //               theme.palette.primary.main,
-  //               theme.palette.action.activatedOpacity
-  //             ),
-  //         }),
-  //       }}
-  //     >
-  //       {numSelected > 0 && !showDetails ? (
-  //         <Typography
-  //           sx={{ flex: "1 1 100%" }}
-  //           color="inherit"
-  //           variant="subtitle1"
-  //           component="div"
-  //         >
-  //           {numSelected} Selected
-  //         </Typography>
-  //       ) : showDetails ? (
-  //         <Typography
-  //           sx={{ flex: "1 1 100%" }}
-  //           variant="h6"
-  //           id="tableTitle"
-  //           component="div"
-  //         >
-  //           DETAYLAR
-  //         </Typography>
-  //       ) : (
-  //         <Typography
-  //           sx={{ flex: "1 1 100%" }}
-  //           variant="h6"
-  //           id="tableTitle"
-  //           component="div"
-  //         >
-  //           ZARARLI ADRESLER
-  //         </Typography>
-  //       )}
-
-  //       {numSelected > 0 && !showDetails ? (
-  //         <Tooltip title="Delete">
-  //           <IconButton>
-  //             <DeleteIcon />
-  //           </IconButton>
-  //         </Tooltip>
-  //       ) : showDetails ? null : (
-  //         <IconButton>
-  //           <FilterListIcon />
-  //         </IconButton>
-  //       )}
-  //     </Toolbar>
-  //   );
-  // }
-
-  // EnhancedTableToolbar.propTypes = {
-  //   numSelected: PropTypes.number.isRequired,
-  // };
-
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
