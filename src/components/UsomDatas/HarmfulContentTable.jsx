@@ -219,7 +219,7 @@ function HarmfulContentTable() {
   const handleShowInfo = async (url) => {
     try {
       const response = await axios.get(
-        `/api?key=0607942437A13C55233425498F4F2AFD&domain=${url}`
+        `/api/?key=0607942437A13C55233425498F4F2AFD&domain=${url}`
       );
       const data = response.data;
       setDetails([data]);

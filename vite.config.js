@@ -15,21 +15,13 @@ export default defineConfig(({ command, mode }) => {
     },
   };
 
-  const harmfulContentProxyOptions = {
-    "/api/address": {
-      target: "https://www.usom.gov.tr/",
-      changeOrigin: true,
-      rewrite: (path) => path.replace(/^\/api\/address/, ""),
-    },
-  };
-
   // Geliştirme modunda ve üretim modunda farklı yapılandırmalar
   return {
     plugins: [react()],
     server: {
       proxy: isProduction
         ? {}
-        : { ...detailProxyOptions, ...harmfulContentProxyOptions },
+        : { ...detailProxyOptions},
     },
   };
 });
