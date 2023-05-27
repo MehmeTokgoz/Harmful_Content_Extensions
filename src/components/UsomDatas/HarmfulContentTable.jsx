@@ -2,7 +2,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import "./HarmfulContentTable.scss";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
