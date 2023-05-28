@@ -31,26 +31,29 @@ function HarmfulContentTable() {
   const [details, setDetails] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
 
-  const getHarmfulContentInfo = async () => {
-    const totalPages = 6;
-    const allData = [];
-
-    for (let page = 1; page < totalPages; page++) {
-      try {
-        const response = await axios.get(
-          `https://www.usom.gov.tr/api/address/index?page=${page}`
-        );
-        const pageData = response.data;
-        allData.push(...pageData.models);
-      } catch (error) {
-        console.log(error);
+  const getHarmfulContentInfo = useMemo(() => {
+    return async () => {
+      const totalPages = 6;
+      const allData = [];
+  
+      for (let page = 1; page < totalPages; page++) {
+        try {
+          const response = await axios.get(
+            `https://www.usom.gov.tr/api/address/index?page=${page}`
+          );
+          const pageData = response.data;
+          allData.push(...pageData.models);
+        } catch (error) {
+          console.log(error);
+        }
       }
-    }
-    setHundredItem(allData);
-    setIsLoading(false);
-  };
-  console.log(hundredItem);
+      setHundredItem(allData);
+      setIsLoading(false);
+    };
+  }, []);  
 
+  console.log(hundredItem)
+  
   useEffect(() => {
     getHarmfulContentInfo();
   }, []);
@@ -65,7 +68,7 @@ function HarmfulContentTable() {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>; // Veri çekilirken "Loading..." mesajını göster
+    return <div>Loading...</div>;
   }
 
   function descendingComparator(a, b, orderBy) {
