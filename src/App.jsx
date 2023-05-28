@@ -61,7 +61,7 @@ function App() {
               className="buttons chart-button"
               onClick={handleChartButtonClick}
             >
-              UZANTI VE AÇIKLAMALARA GÖRE GRAFİK
+              AÇIKLAMALARA GÖRE GRAFİK
             </button>
           }
         </div>

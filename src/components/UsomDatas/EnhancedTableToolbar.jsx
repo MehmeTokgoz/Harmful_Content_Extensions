@@ -8,6 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { alpha } from "@mui/material/styles";
+import "./EnhancedTableToolbar.scss";
 
 const EnhancedTableToolbar = (props) => {
   // eslint-disable-next-line no-unused-vars
@@ -15,6 +16,7 @@ const EnhancedTableToolbar = (props) => {
 
   return (
     <Toolbar
+    className="main-toolbar"
       sx={{
         pl: { sm: 2 },
         pr: { xs: 1, sm: 1 },
@@ -40,7 +42,7 @@ const EnhancedTableToolbar = (props) => {
         <Typography
           sx={{ flex: "1 1 100%" }}
           variant="h6"
-          id="tableTitle"
+          id="tableDetailsTitle"
           component="div"
         >
           DETAYLAR
@@ -48,7 +50,7 @@ const EnhancedTableToolbar = (props) => {
       ) : (
         <Typography
           sx={{ flex: "1 1 100%" }}
-          variant="h6"
+          variant="h5"
           id="tableTitle"
           component="div"
         >

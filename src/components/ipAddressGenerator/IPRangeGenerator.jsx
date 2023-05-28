@@ -18,6 +18,20 @@ function IPRangeGenerator() {
 
   const generateIPRange = () => {
     const ipParts = ipAddress.split(".");
+    const isInvalidIP = ipParts.some((part) => {
+      return !/^\d+$/.test(part) || part.slice(-1).match(/[^\d.]/) || part>255;
+    });
+    if (isInvalidIP) {
+      setErrorMessage(
+        "Lütfen geçerli bir IP adresi girin. IP adresi: 0.0.0.0 ila 255.255.255.255 arasında nokta ile ayrılmış biçimde olmalıdır."
+      );
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000);
+
+      return;
+    }
+
     if (ipParts.length === 4 && ipParts.every((part) => /^\d+$/.test(part))) {
       const baseIP = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.`;
       const generatedIPList = [];
@@ -42,13 +56,6 @@ function IPRangeGenerator() {
       setInitialIP("");
       setFinalIP("");
       setShowIPs(false);
-
-      setErrorMessage(
-        "Lütfen geçerli bir IP adresi girin. IP adresi: 0.0.0.0 ila 255.255.255.255 arasında nokta ile ayrılmış biçimde olmalıdır."
-      );
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 3000);
     }
   };
 
