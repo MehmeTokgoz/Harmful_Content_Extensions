@@ -1,6 +1,9 @@
-
-
-
+// $main-background:linear-gradient(180deg, hsla(260, 53%, 34%, 1) 0%, hsla(244, 33%, 49%, 1) 30%, hsla(170, 42%, 71%, 1) 100%);
+// $main-background:linear-gradient(90deg, hsla(18, 59%, 65%, 1) 0%, hsla(21, 61%, 51%, 1) 50%, hsla(26, 59%, 60%, 1) 79%);
+// $main-background: linear-gradient(90deg, hsla(39, 100%, 77%, 1) 0%, hsla(22, 90%, 57%, 1) 100%);
+// $main-background: linear-gradient(90deg, hsla(154, 53%, 82%, 1) 0%, hsla(24, 88%, 65%, 1) 50%, hsla(216, 56%, 16%, 1) 100%);
+$main-background: linear-gradient(90deg, hsla(16, 34%, 27%, 1) 0%, hsla(24, 81%, 65%, 1) 50%, hsla(8, 25%, 23%, 1) 100%);
+$secondary-background: hsla(8, 25%, 23%, 1);
 .fox-container {
   display: flex;
   flex-direction: column;
@@ -14,7 +17,8 @@
   width: 89%;
   height: 50px;
   padding: 10px 0;
-  background-color: #03045e;
+  background: $main-background;
+  // background-color: #03045e;
   border-radius: 4px;
   margin-bottom: 10px;
   box-sizing: border-box;
@@ -44,7 +48,8 @@
 .buttons {
   margin-top: 10px;
   padding: 8px 16px;
-  background-color: #007bff;
+  // background-color: #007bff;
+  // background-color: #03045e;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -72,7 +77,9 @@
     left: 5%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    background-color:#023e8a;
+    background: $secondary-background;
+    // background-color: #03045e;
+    // background-color:#023e8a;
 }
 
 .change-quote-button {
@@ -82,7 +89,9 @@
     top: 0%;
     right: -5%;
     transform: translate(-50%, -50%); 
-    background-color:#023e8a; 
+    // background-color:#023e8a; 
+    // background-color: #03045e;
+    background: $secondary-background;
 }
 
 .quote {

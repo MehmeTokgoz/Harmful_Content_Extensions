@@ -6,7 +6,6 @@
   }
   
   .weather-info-container {
-    background-color: #03045e;
     border-radius: 10px;
     padding: 5px;
     margin: 10px;
@@ -17,19 +16,16 @@
   
   .weather-city-name {
     font-size: 0.80rem;
-    font-weight: bold;
+
   }
   
   .weather-temp {
     font-size: 0.80rem;
-    font-weight: bold;
-    // margin-bottom: 5px;
   }
   
   .weather-description {
     font-size: 0.80rem;
     text-transform: capitalize;
-font-weight: bold;
   }
   
   
