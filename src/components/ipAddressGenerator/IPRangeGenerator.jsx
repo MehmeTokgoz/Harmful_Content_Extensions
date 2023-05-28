@@ -11,6 +11,9 @@ function IPRangeGenerator() {
   const [finalIP, setFinalIP] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [showIPs, setShowIPs] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [showAllIps, setShowAllIps] = useState(false);
+  // const [selectedIPRange, setSelectedIPRange] = useState(null);
 
   const handleIPChange = (event) => {
     setIPAddress(event.target.value);
@@ -19,7 +22,9 @@ function IPRangeGenerator() {
   const generateIPRange = () => {
     const ipParts = ipAddress.split(".");
     const isInvalidIP = ipParts.some((part) => {
-      return !/^\d+$/.test(part) || part.slice(-1).match(/[^\d.]/) || part>255;
+      return (
+        !/^\d+$/.test(part) || part.slice(-1).match(/[^\d.]/) || part > 255
+      );
     });
     if (isInvalidIP) {
       setErrorMessage(
@@ -35,7 +40,8 @@ function IPRangeGenerator() {
     if (ipParts.length === 4 && ipParts.every((part) => /^\d+$/.test(part))) {
       const baseIP = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.`;
       const generatedIPList = [];
-      for (let i = 0; i <= 254; i += 50) {
+
+      for (let i = 50; i <= 254; i += 50) {
         generatedIPList.push(`${baseIP}${i}`);
       }
       setGeneratedIPs(generatedIPList);
