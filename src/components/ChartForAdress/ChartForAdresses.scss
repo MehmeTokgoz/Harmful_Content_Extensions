@@ -1,10 +1,14 @@
+$main-background: linear-gradient(90deg, hsla(16, 34%, 27%, 1) 0%, hsla(24, 81%, 65%, 1) 50%, hsla(8, 25%, 23%, 1) 100%);
+$secondary-background: hsla(8, 25%, 23%, 1);
+
 .chart-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 90%;
   margin: 20px auto;
-  border: 1px solid grey;
+  border: 1px solid $secondary-background;
+  border-radius: 5px;
   background-color: #ddd;
 
 }
@@ -15,31 +19,30 @@
 
 .pie {
   transition: fill 0.3s ease;
+  fill: rgb(192, 129, 86);
 }
 
 .pie:hover {
-  fill: #0056b3;
+  fill: $secondary-background;
 }
 
 .chart-tooltip {
-  background-color: #fff;
-  border: 1px solid #ddd;
   padding: 10px;
   font-size: 14px;
 }
 
 .custom-tooltip p {
   margin: 5px 0;
-  color: #ffffff;
+  color: #e6d2d2;
 }
 
 .chart-title {
-  background-color: #0056b3;
+  background:$main-background;
   color: #ffffff;
   width: 60%;
   margin: 2rem auto;
   border: 1px solid #ddd;
-  box-shadow: 5px 5px rgb(122, 172, 238);
+  box-shadow: 5px 5px hsla(24, 81%, 65%, 1);
   font-size: 24px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;

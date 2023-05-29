@@ -276,10 +276,11 @@ function HarmfulContentTable() {
                               ? "harmful-content-table-row-selected"
                               : ""
                           }`}
+                          id="deneme"
                         >
                           <TableCell padding="checkbox">
                             <Checkbox
-                              color="primary"
+                              // color="primary"
                               checked={isItemSelected}
                               inputProps={{
                                 "aria-labelledby": labelId,

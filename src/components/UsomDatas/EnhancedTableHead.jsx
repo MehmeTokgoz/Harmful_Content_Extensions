@@ -10,6 +10,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import TableRow from "@mui/material/TableRow";
 import Checkbox from "@mui/material/Checkbox";
 import { visuallyHidden } from "@mui/utils";
+import "./EnhancedTableHead.scss"
 
 function EnhancedTableHead(props) {
   const {
@@ -37,7 +38,6 @@ function EnhancedTableHead(props) {
         <TableCell padding="checkbox">
           <Checkbox
             className="harmful-content-table-head-cell"
-            color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}

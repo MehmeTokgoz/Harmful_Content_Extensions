@@ -1,3 +1,5 @@
+$main-background: linear-gradient(90deg, hsla(16, 34%, 27%, 1) 0%, hsla(24, 81%, 65%, 1) 50%, hsla(8, 25%, 23%, 1) 100%);
+$secondary-background: hsla(8, 25%, 23%, 1);
 .main-table-container {
     display: flex;
     flex-direction: column;
@@ -21,7 +23,8 @@
   }
   
   .harmful-content-table-head {
-    background-color: #0056b3;
+    background: $main-background;
+    // background-color: #0056b3;
   }
   
   .harmful-content-table-head-cell {
@@ -39,29 +42,26 @@
   }
   
   
-  .harmful-content-table-row-selected {
-    background-color: #0056b3;
-    color: #fff;
-  }
-  
   .harmful-content-table-body-cell {
     font-weight: 400;
   }
 
   .harmful-content-table-body-cell:hover {
-    // background-color: #0096c7;
-    background-color: #0056b3;
+    background-color: rgb(170, 109, 69);
+    color: white;
   }
+
   
   #button-show-info {
     color: #fff;
-    background-color:#0077b6;
-    background-color:#0077b6;
+    // background-color:#0077b6;
+    // background-color:#0077b6;
+    background-color: $secondary-background;
     transition: background-color 0.3s ease;
   }
   
   #button-show-info:hover {
-    background-color: #00b4d8;
-    border-color: #0056b3;
+    background-color: rgb(170, 109, 69);
+    border-color: $secondary-background;
   }
   

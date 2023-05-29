@@ -88,6 +88,7 @@ function ChartForAdresses() {
             cy="50%"
             outerRadius={200}
             label
+            stroke="hsla(8, 25%, 23%, 1)"
           />
           {chartData.map((entry, index) => (
             <Cell
