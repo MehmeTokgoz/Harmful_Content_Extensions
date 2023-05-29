@@ -35,7 +35,7 @@ function HarmfulContentTable() {
     return async () => {
       const totalPages = 6;
       const allData = [];
-  
+
       for (let page = 1; page < totalPages; page++) {
         try {
           const response = await axios.get(
@@ -50,10 +50,10 @@ function HarmfulContentTable() {
       setHundredItem(allData);
       setIsLoading(false);
     };
-  }, []);  
+  }, []);
 
-  console.log(hundredItem)
-  
+  console.log(hundredItem);
+
   useEffect(() => {
     getHarmfulContentInfo();
   }, []);
@@ -280,7 +280,6 @@ function HarmfulContentTable() {
                         >
                           <TableCell padding="checkbox">
                             <Checkbox
-                              // color="primary"
                               checked={isItemSelected}
                               inputProps={{
                                 "aria-labelledby": labelId,
@@ -330,7 +329,7 @@ function HarmfulContentTable() {
                               onClick={() => setShowDetails(false)}
                               id="button-show-info"
                             >
-                              GERİ DÖN
+                              GO BACK
                             </Button>
                           </TableCell>
                         </TableRow>
@@ -409,7 +408,7 @@ function HarmfulContentTable() {
                             onClick={() => handleShowInfo(row.url)}
                             id="button-show-info"
                           >
-                            Bilgileri Göster
+                            SHOW DETAILS
                           </Button>
                         </TableCell>
                       </TableRow>

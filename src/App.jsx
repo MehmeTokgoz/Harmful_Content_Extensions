@@ -43,7 +43,7 @@ function App() {
               className="buttons table-button"
               onClick={handleTableButtonClick}
             >
-              ZARARLI İÇERİKLER TABLOSU
+              HARMFUL CONTENT TABLE
             </button>
           }
           {
@@ -52,7 +52,7 @@ function App() {
               className="buttons ip-button"
               onClick={handleIPRangeButtonClick}
             >
-              IP SORGULA
+              QUERY IP
             </button>
           }
           {
@@ -61,7 +61,7 @@ function App() {
               className="buttons chart-button"
               onClick={handleChartButtonClick}
             >
-              AÇIKLAMALARA GÖRE GRAFİK
+              GRAPH BASED ON DESCRIPTION
             </button>
           }
         </div>

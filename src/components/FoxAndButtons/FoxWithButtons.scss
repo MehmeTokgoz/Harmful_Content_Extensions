@@ -1,7 +1,3 @@
-// $main-background:linear-gradient(180deg, hsla(260, 53%, 34%, 1) 0%, hsla(244, 33%, 49%, 1) 30%, hsla(170, 42%, 71%, 1) 100%);
-// $main-background:linear-gradient(90deg, hsla(18, 59%, 65%, 1) 0%, hsla(21, 61%, 51%, 1) 50%, hsla(26, 59%, 60%, 1) 79%);
-// $main-background: linear-gradient(90deg, hsla(39, 100%, 77%, 1) 0%, hsla(22, 90%, 57%, 1) 100%);
-// $main-background: linear-gradient(90deg, hsla(154, 53%, 82%, 1) 0%, hsla(24, 88%, 65%, 1) 50%, hsla(216, 56%, 16%, 1) 100%);
 $main-background: linear-gradient(90deg, hsla(16, 34%, 27%, 1) 0%, hsla(24, 81%, 65%, 1) 50%, hsla(8, 25%, 23%, 1) 100%);
 $secondary-background: hsla(8, 25%, 23%, 1);
 .fox-container {
@@ -48,8 +44,6 @@ $secondary-background: hsla(8, 25%, 23%, 1);
 .buttons {
   margin-top: 10px;
   padding: 8px 16px;
-  // background-color: #007bff;
-  // background-color: #03045e;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -64,7 +58,7 @@ $secondary-background: hsla(8, 25%, 23%, 1);
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #f0f0f0;
-  opacity: 0.4;
+  opacity: 0.35;
   width: 100%;
   height: 100%;
 }
@@ -100,6 +94,9 @@ $secondary-background: hsla(8, 25%, 23%, 1);
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 2.2rem;
+  font-family:Arial, Helvetica, sans-serif;
+  font-style: italic;
+  font-weight: 400;
   margin-bottom: 10px;
   border-radius: 4px;
 }

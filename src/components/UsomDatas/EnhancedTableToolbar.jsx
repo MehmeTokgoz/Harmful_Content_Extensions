@@ -12,7 +12,7 @@ import "./EnhancedTableToolbar.scss";
 
 const EnhancedTableToolbar = (props) => {
   // eslint-disable-next-line no-unused-vars
-  const { numSelected, showDetails, setShowDetails } = props;
+  const { numSelected, showDetails, setShowDetails} = props;
 
   return (
     <Toolbar
@@ -45,7 +45,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableDetailsTitle"
           component="div"
         >
-          DETAYLAR
+          DETAILS
         </Typography>
       ) : (
         <Typography
@@ -54,7 +54,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          ZARARLI ADRESLER
+          HARMFUL ADDRESSES
         </Typography>
       )}
 

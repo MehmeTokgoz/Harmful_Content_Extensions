@@ -43,7 +43,7 @@ function FoxWithButtons() {
       </div>
       <div className="fox">
         <img className="fox-image" src={foxImage} alt="" />
-        <button className="buttons change-image-button" onClick={getRandomImage}>RESMİ DEĞİŞTİR</button>
+        <button className="buttons change-image-button" onClick={getRandomImage}>CHANGE IMAGE</button>
         <div>
           {pholosophy.map((content) => (
             <>
@@ -54,7 +54,7 @@ function FoxWithButtons() {
             </>
           ))}
         </div>
-        <button className="buttons change-quote-button" onClick={getStoaPhlosophy}>ALINTIYI DEĞİŞTİR</button>
+        <button className="buttons change-quote-button" onClick={getStoaPhlosophy}>MODIFY THE QUOTE</button>
       </div>
     </div>
   );

@@ -15,9 +15,9 @@ const CustomTooltip = ({ active, payload }) => {
     return (
       <div className="custom-tooltip">
         {/* eslint-disable-next-line react/prop-types*/}
-        <p>Uzantı: .{data.extension}</p>
+        <p>Extension: .{data.extension}</p>
         {/* eslint-disable-next-line react/prop-types*/}
-        <p>Açıklama: {data.desc}</p>
+        <p>Description: {data.desc}</p>
       </div>
     );
   }
@@ -77,7 +77,7 @@ function ChartForAdresses() {
   return (
     <>
       <div className="chart-container">
-        <h2 className="chart-title">Uzantılarına Göre Zararlı İçerikler</h2>
+        <h2 className="chart-title">HARMFUL CONTENT BY EXTENSIONS</h2>
         <PieChart className="main-pie-chart" width={600} height={500}>
           <Pie
             className="pie"

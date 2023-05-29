@@ -17,8 +17,8 @@ function DateAndClock() {
 
   return (
     <div className="date-clock-container">
-      <p className="date-info">Tarih: {currentDate.toLocaleDateString("tr-TR")}</p>
-      <p className="clock-info">Saat: {currentDate.toLocaleTimeString()}</p>
+      <p className="date-info">Date: {currentDate.toLocaleDateString("tr-TR")}</p>
+      <p className="clock-info">Clock: {currentDate.toLocaleTimeString()}</p>
     </div>
   );
 }
