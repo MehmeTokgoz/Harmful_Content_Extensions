@@ -7,7 +7,7 @@ function Weather() {
   const [weatherInfo, setWeatherInfo] = useState([]);
 
   function getWeather() {
-    const key = "7a94793461bc6f9d1ee8690913c5ca1e";
+    const key = import.meta.env.API_KEY;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=Ankara&units=metric&appid=${key}`;
     axios.get(url).then(({ data }) => setWeatherInfo([{ data }]));
   }

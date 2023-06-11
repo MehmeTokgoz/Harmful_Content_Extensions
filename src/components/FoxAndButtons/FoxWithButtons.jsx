@@ -54,7 +54,7 @@ function FoxWithButtons() {
             </>
           ))}
         </div>
-        <button className="buttons change-quote-button" onClick={getStoaPhlosophy}>MODIFY THE QUOTE</button>
+        <button className="buttons change-quote-button" onClick={getStoaPhlosophy}>CHANGE THE QUOTE</button>
       </div>
     </div>
   );
