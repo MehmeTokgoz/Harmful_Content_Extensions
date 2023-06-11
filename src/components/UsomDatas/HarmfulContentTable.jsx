@@ -31,11 +31,12 @@ function HarmfulContentTable() {
   const [details, setDetails] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
 
+
   const getHarmfulContentInfo = useMemo(() => {
     return async () => {
       const totalPages = 6;
       const allData = [];
-
+//Getting 100 harmful contents from USOM api (api provides 20 content per page)
       for (let page = 1; page < totalPages; page++) {
         try {
           const response = await axios.get(

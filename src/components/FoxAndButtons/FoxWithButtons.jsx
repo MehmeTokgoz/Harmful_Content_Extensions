@@ -8,7 +8,7 @@ import Weather from "../Weather/Weather";
 function FoxWithButtons() {
   const [foxImage, setFoxImage] = useState();
   const [pholosophy, setPholosophy] = useState([]);
-
+//Get images from external api
   const getRandomImage = async () => {
     try {
       const response = await axios.get("https://randomfox.ca/floof");
@@ -17,7 +17,7 @@ function FoxWithButtons() {
       console.log(error);
     }
   };
-
+//Get phlosophy texts from external api
   const getStoaPhlosophy = async () => {
     try {
       const response = await axios.get(

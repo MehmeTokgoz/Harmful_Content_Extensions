@@ -18,7 +18,7 @@ function IPRangeGenerator() {
   const handleIPChange = (event) => {
     setIPAddress(event.target.value);
   };
-
+//Generating IP address
   const generateIPRange = () => {
     const ipParts = ipAddress.split(".");
     const isInvalidIP = ipParts.some((part) => {
@@ -26,6 +26,7 @@ function IPRangeGenerator() {
         !/^\d+$/.test(part) || part.slice(-1).match(/[^\d.]/) || part > 255
       );
     });
+    //Checking invalid IP address
     if (isInvalidIP) {
       setErrorMessage(
         "Lütfen geçerli bir IP adresi girin. IP adresi: 0.0.0.0 ila 255.255.255.255 arasında nokta ile ayrılmış biçimde olmalıdır."

@@ -10,7 +10,7 @@ function App() {
   const [showHarmfulContentTable, setShowHarmfulContentTable] = useState(false);
   const [showIPRangeGenerator, setShowIPRangeGenerator] = useState(false);
   const [showChartForAdresses, setShowChartForAdresses] = useState(false);
-
+// Setting visibility for HarmfulContentTable, IP Generator and Chart
   const handleTableButtonClick = () => {
     setShowHarmfulContentTable(!showHarmfulContentTable);
     setShowIPRangeGenerator(false);
