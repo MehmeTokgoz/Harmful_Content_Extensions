@@ -6,6 +6,101 @@ function IPRangeGenerator() {
   const [ipAddress, setIPAddress] = useState("");
   const [generatedIPs, setGeneratedIPs] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const [initialIP, setInitialIP] = useState("");
+  const [finalIP, setFinalIP] = useState("");
+
+  const handleIPChange = (event) => {
+    setIPAddress(event.target.value);
+  };
+
+  const generateIPRange = () => {
+    const ipParts = ipAddress.split(".");
+    const isInvalidIP = ipParts.some(
+      (part) => !/^\d+$/.test(part) || part > 255
+    );
+
+    if (isInvalidIP || ipParts.length !== 4) {
+      setErrorMessage(
+        "Please enter a valid IP address. Format: 0.0.0.0 to 255.255.255.255"
+      );
+      setTimeout(() => setErrorMessage(""), 3000);
+      return;
+    }
+
+    const baseIP = `${ipParts[0]}.${ipParts[1]}.${ipParts[2]}.`;
+    const generatedIPList = [];
+
+    for (let i = 50; i <= 254; i += 50) {
+      generatedIPList.push(`${baseIP}${i}`);
+    }
+
+    setGeneratedIPs(generatedIPList);
+    setInitialIP(`${baseIP}1`);
+    setFinalIP(`${baseIP}254`);
+    setErrorMessage("");
+  };
+
+  return (
+    <div className="ip-table-container">
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
+
+      <input
+        className="ip-input-box"
+        type="text"
+        value={ipAddress}
+        placeholder="Enter IP address"
+        onChange={handleIPChange}
+      />
+      <button className="ip-generate-button" onClick={generateIPRange}>
+        Generate
+      </button>
+
+      <div className="generate-result-container">
+        <table className="table-container">
+          <thead>
+            <tr>
+              <th>Initial IP</th>
+              <th>Final IP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{initialIP}</td>
+              <td>{finalIP}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        {generatedIPs.length > 0 && (
+          <>
+            <p className="between-ips">Intermediate IP addresses:</p>
+            <ul className="list-container">
+              {generatedIPs.map((ip, index) => (
+                <li className="list-item" key={index}>
+                  {ip}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default IPRangeGenerator;
+
+
+
+{/** 
+// eslint-disable-next-line no-unused-vars
+import React, { useState } from "react";
+import "./IPRangeGenerator.scss";
+
+function IPRangeGenerator() {
+  const [ipAddress, setIPAddress] = useState("");
+  const [generatedIPs, setGeneratedIPs] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [initialIP, setInitialIP] = useState("");
   const [finalIP, setFinalIP] = useState("");
@@ -107,3 +202,4 @@ function IPRangeGenerator() {
   );
 }
 export default IPRangeGenerator;
+*/}

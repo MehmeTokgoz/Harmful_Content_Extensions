@@ -1,3 +1,89 @@
+
+// eslint-disable-next-line no-unused-vars
+import React from "react";
+import PropTypes from "prop-types";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import { alpha } from "@mui/material/styles";
+import "./EnhancedTableToolbar.scss";
+
+const EnhancedTableToolbar = ({ numSelected, showDetails }) => {
+  return (
+    <Toolbar
+      className="main-toolbar"
+      sx={{
+        pl: { sm: 2 },
+        pr: { xs: 1, sm: 1 },
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        ...(numSelected > 0 && {
+          bgcolor: (theme) =>
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
+        }),
+      }}
+    >
+      {numSelected > 0 && !showDetails ? (
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
+          {numSelected} selected
+        </Typography>
+      ) : showDetails ? (
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          variant="h6"
+          id="tableDetailsTitle"
+          component="div"
+        >
+          Details
+        </Typography>
+      ) : (
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          variant="h5"
+          id="tableTitle"
+          component="div"
+        >
+          Harmful Addresses
+        </Typography>
+      )}
+
+      {numSelected > 0 && !showDetails ? (
+        <Tooltip title="Delete">
+          <IconButton color="error">
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+      ) : !showDetails ? (
+        <Tooltip title="Filter list">
+          <IconButton color="default">
+            <FilterListIcon />
+          </IconButton>
+        </Tooltip>
+      ) : null}
+    </Toolbar>
+  );
+};
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+  showDetails: PropTypes.bool.isRequired,
+};
+
+export default EnhancedTableToolbar;
+
+{/*}
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import PropTypes from "prop-types";
@@ -80,3 +166,4 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default EnhancedTableToolbar;
+*/}

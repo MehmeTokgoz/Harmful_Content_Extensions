@@ -1,6 +1,421 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import {
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TablePagination,
+  TableRow,
+  Checkbox,
+  FormControlLabel,
+  Switch,
+  Button,
+  CircularProgress,
+} from "@mui/material";
+
+import EnhancedTableHead from "./EnhancedTableHead";
+import EnhancedTableToolbar from "./EnhancedTableToolbar";
+
+function HarmfulContentTable() {
+  const [items, setItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("date");
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [dense, setDense] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const [details, setDetails] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
+
+  const getHarmfulContentInfo = useMemo(() => {
+    return async () => {
+      setIsLoading(true);
+      const totalPages = 6;
+      const allData = [];
+
+      for (let page = 1; page < totalPages; page++) {
+        try {
+          const response = await axios.get(
+            `https://www.usom.gov.tr/api/address/index?page=${page}`
+          );
+          const pageData = response.data;
+          allData.push(...pageData.models);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+      setItems(allData);
+      setIsLoading(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    getHarmfulContentInfo();
+  }, []);
+
+  // Sorting functions
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) return -1;
+    if (b[orderBy] > a[orderBy]) return 1;
+    return 0;
+  }
+
+  function getComparator(order, orderBy) {
+    return order === "desc"
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  function stableSort(array, comparator) {
+    const stabilized = array.map((el, index) => [el, index]);
+    stabilized.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      return order !== 0 ? order : a[1] - b[1];
+    });
+    return stabilized.map((el) => el[0]);
+  }
+
+  const visibleRows = useMemo(
+    () =>
+      stableSort(items, getComparator(order, orderBy)).slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [order, orderBy, page, rowsPerPage, items]
+  );
+
+  if (isLoading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" p={4}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  // If details are being shown
+  const headCells = showDetails
+    ? [
+        {
+          id: "domain_name",
+          numeric: false,
+          disablePadding: true,
+          label: "Domain Name",
+        },
+        {
+          id: "city",
+          numeric: true,
+          disablePadding: false,
+          label: "City",
+        },
+        {
+          id: "country",
+          numeric: true,
+          disablePadding: false,
+          label: "Country",
+        },
+        {
+          id: "zip_code",
+          numeric: true,
+          disablePadding: false,
+          label: "Zip Code",
+        },
+        {
+          id: "phone",
+          numeric: true,
+          disablePadding: false,
+          label: "Phone",
+        },
+        {
+          id: "actions",
+          numeric: false,
+          disablePadding: false,
+          label: "Actions",
+        },
+      ]
+    : [
+        {
+          id: "name",
+          numeric: false,
+          disablePadding: true,
+          label: "Harmful Address (URL)",
+        },
+        {
+          id: "date",
+          numeric: true,
+          disablePadding: false,
+          label: "Date Added",
+        },
+        {
+          id: "criticality_level",
+          numeric: true,
+          disablePadding: false,
+          label: "Criticality Level",
+        },
+        {
+          id: "description",
+          numeric: true,
+          disablePadding: false,
+          label: "Description",
+        },
+        {
+          id: "source",
+          numeric: true,
+          disablePadding: false,
+          label: "Source",
+        },
+        {
+          id: "actions",
+          numeric: false,
+          disablePadding: false,
+          label: "Actions",
+        },
+      ];
+
+  {
+    /*}
+  const headCells = showDetails
+    ? [
+        { id: "domain_name", numeric: false, disablePadding: true, label: "Domain Name" },
+        { id: "city", numeric: true, disablePadding: false, label: "City" },
+        { id: "country", numeric: true, disablePadding: false, label: "Country" },
+        { id: "zip_code", numeric: true, disablePadding: false, label: "Zip Code" },
+        { id: "phone", numeric: true, disablePadding: false, label: "Phone" },
+        {},
+      ]
+    : [
+        { id: "name", numeric: false, disablePadding: true, label: "Harmful Address (URL)" },
+        { id: "date", numeric: true, disablePadding: false, label: "Date Added" },
+        { id: "criticality_level", numeric: true, disablePadding: false, label: "Criticality Level" },
+        { id: "description", numeric: true, disablePadding: false, label: "Description" },
+        { id: "source", numeric: true, disablePadding: false, label: "Source" },
+        {},
+      ];
+    */
+  }
+
+  // Selection & interaction handlers
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelected = items.map((n) => n.url);
+      setSelected(newSelected);
+      return;
+    }
+    setSelected([]);
+  };
+
+  const handleClick = (event, url) => {
+    const selectedIndex = selected.indexOf(url);
+    let newSelected = [];
+
+    if (selectedIndex === -1) newSelected = [...selected, url];
+    else if (selectedIndex === 0) newSelected = selected.slice(1);
+    else if (selectedIndex === selected.length - 1)
+      newSelected = selected.slice(0, -1);
+    else if (selectedIndex > 0)
+      newSelected = [
+        ...selected.slice(0, selectedIndex),
+        ...selected.slice(selectedIndex + 1),
+      ];
+
+    setSelected(newSelected);
+  };
+
+  const handleChangePage = (event, newPage) => setPage(newPage);
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleChangeDense = (event) => setDense(event.target.checked);
+
+  const isSelected = (url) => selected.indexOf(url) !== -1;
+
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - items.length) : 0;
+
+  const handleShowInfo = async (url) => {
+    try {
+      const response = await axios.get(
+        `/api/?key=0607942437A13C55233425498F4F2AFD&domain=${url}`
+      );
+      const data = response.data;
+      setDetails([data]);
+      setShowDetails(true);
+    } catch (error) {
+      console.error("Error fetching details:", error);
+    }
+  };
+
+  return (
+    <Box>
+      <Paper>
+        <EnhancedTableToolbar numSelected={selected.length} />
+        <TableContainer>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            size={dense ? "small" : "medium"}
+          >
+            <EnhancedTableHead
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={handleSelectAllClick}
+              onRequestSort={handleRequestSort}
+              rowCount={items.length}
+              headCells={headCells}
+            />
+            <TableBody>
+              {showDetails
+                ? details.map((detail, index) => {
+                    const isItemSelected = isSelected(detail.registrant.name);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) =>
+                          handleClick(event, detail.registrant.name)
+                        }
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={detail.billing.domain_id}
+                        selected={isItemSelected}
+                        sx={{ cursor: "pointer" }}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            checked={isItemSelected}
+                            inputProps={{ "aria-labelledby": labelId }}
+                          />
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                        >
+                          {detail.registrant.name}
+                        </TableCell>
+                        <TableCell align="right">
+                          {detail.registrant.city}
+                        </TableCell>
+                        <TableCell align="right">
+                          {detail.registrant.country}
+                        </TableCell>
+                        <TableCell align="right">
+                          {detail.registrant.zip_code}
+                        </TableCell>
+                        <TableCell align="right">
+                          {detail.registrant.phone}
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            variant="outlined"
+                            color="secondary"
+                            onClick={() => setShowDetails(false)}
+                          >
+                            Back
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+                : visibleRows.map((row, index) => {
+                    const isItemSelected = isSelected(row.url);
+                    const labelId = `enhanced-table-checkbox-${index}`;
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row.url)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.url}
+                        selected={isItemSelected}
+                        sx={{ cursor: "pointer" }}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            color="primary"
+                            checked={isItemSelected}
+                            inputProps={{ "aria-labelledby": labelId }}
+                          />
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                        >
+                          {row.url}
+                        </TableCell>
+                        <TableCell align="right">{row.date}</TableCell>
+                        <TableCell align="right">
+                          {row.criticality_level}
+                        </TableCell>
+                        <TableCell align="right">{row.desc}</TableCell>
+                        <TableCell align="right">{row.source}</TableCell>
+                        <TableCell align="right">
+                          <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={() => handleShowInfo(row.url)}
+                          >
+                            Show Details
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              {emptyRows > 0 && (
+                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 50, 100]}
+          labelRowsPerPage="Rows per page:"
+          component="div"
+          count={items.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Dense Padding"
+      />
+    </Box>
+  );
+}
+
+export default HarmfulContentTable;
+
+{
+  /*
+
+// eslint-disable-next-line no-unused-vars
+import React, { useEffect, useMemo, useState } from "react";
+import axios from "axios";
 import "./HarmfulContentTable.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -446,3 +861,5 @@ function HarmfulContentTable() {
   );
 }
 export default HarmfulContentTable;
+*/
+}
