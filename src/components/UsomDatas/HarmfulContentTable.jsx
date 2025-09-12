@@ -139,7 +139,7 @@ function HarmfulContentTable() {
           id: "name",
           numeric: false,
           disablePadding: true,
-          label: "Zararlı Adres (Url)",
+          label: "Harmful Adress (Url)",
         },
         {
           id: "date",
