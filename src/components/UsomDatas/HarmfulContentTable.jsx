@@ -260,12 +260,12 @@ function HarmfulContentTable() {
   };
 
   return (
-    <Box>
+    <Box >
       <Paper>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
+        <TableContainer sx={{ minWidth: 250 }}>
           <Table
-            sx={{ minWidth: 750 }}
+            sx={{}}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
           >
