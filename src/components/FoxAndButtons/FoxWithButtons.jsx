@@ -20,6 +20,9 @@ function FoxWithButtons() {
   const [philosophy, setPhilosophy] = useState([]);
   const [error, setError] = useState(null);
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  console.log("Url:", backendUrl);
+
   // Fox image API
   const getRandomImage = async () => {
     try {
@@ -32,11 +35,14 @@ function FoxWithButtons() {
   };
 
   // Stoic philosophy API
+
   const getStoicPhilosophy = async () => {
     try {
       setError(null);
-      const response = await axios.get("http://localhost:5000/api/stoic");
-      setPhilosophy([response.data]);
+      const response = await axios.get(`${backendUrl}/api/stoic-quote`);
+      console.log("Response:", response.data);
+
+      setPhilosophy([response.data.data]);
     } catch (err) {
       setError("Could not fetch stoic quote.");
     }
@@ -49,7 +55,12 @@ function FoxWithButtons() {
 
   return (
     <Card elevation={4} sx={{ p: 2, borderRadius: 3, mb: 3 }}>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={2}
+      >
         <DateAndClock />
         <Weather />
       </Box>
@@ -96,11 +107,8 @@ function FoxWithButtons() {
 
 export default FoxWithButtons;
 
-
-
-
-
-{/* 
+{
+  /* 
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -164,4 +172,5 @@ function FoxWithButtons() {
 }
 
 export default FoxWithButtons;
-*/}
+*/
+}

@@ -28,6 +28,21 @@ app.get("/api/weather", async (req, res) => {
   }
 });
 
+app.get("/api/stoic-quote", async (req, res) => {
+  try {
+    const response = await axios.get("https://stoic.tekloon.net/stoic-quote");
+    res.json(response.data);
+  } catch (error) {
+    console.error("Stoic API error:", error.message);
+    res.status(500).json({ error: "Failed to fetch stoic quote" });
+  }
+});
+
+
+
+
+
+
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
