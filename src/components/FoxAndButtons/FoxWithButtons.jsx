@@ -35,7 +35,7 @@ function FoxWithButtons() {
   const getStoicPhilosophy = async () => {
     try {
       setError(null);
-      const response = await axios.get("https://api.themotivate365.com/stoic-quote");
+      const response = await axios.get("http://localhost:5000/api/stoic");
       setPhilosophy([response.data]);
     } catch (err) {
       setError("Could not fetch stoic quote.");
