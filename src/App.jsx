@@ -18,7 +18,7 @@ import ChartForAdresses from "./components/ChartForAdress/ChartForAdresses";
 
 const theme = createTheme({
   palette: {
-    mode: "light", // dark mode da eklenebilir
+    mode: "light",
     primary: { main: "#1976d2" },
     secondary: { main: "#9c27b0" },
   },
