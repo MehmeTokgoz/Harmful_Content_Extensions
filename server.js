@@ -10,10 +10,8 @@ app.use(cors());
 
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 5000;
-console.log("Port", PORT)
 // eslint-disable-next-line no-undef
 const WeatherKey = process.env.OPENWEATHER_KEY;
-console.log(WeatherKey)
 
 // Weather endpoint
 app.get("/api/weather", async (req, res) => {
