@@ -375,7 +375,7 @@ function HarmfulContentTable() {
                             color="primary"
                             onClick={() => handleShowInfo(row.url)}
                           >
-                            Show Details
+                            Details
                           </Button>
                         </TableCell>
                       </TableRow>
