@@ -32,22 +32,16 @@ function App() {
       <CssBaseline />
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
+
           <Box display="flex" justifyContent="center" mb={3}>
             <FoxWithButtons />
           </Box>
-
-          {/* Aktif component gösterimi */}
-          <Box mb={3}>
-            {activeView === "table" && <HarmfulContentTable />}
-            {activeView === "ip" && <IPRangeGenerator />}
-            {activeView === "chart" && <ChartForAdresses />}
-          </Box>
-
-          {/* Buton grubu */}
-          <Stack
+                   <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
             justifyContent="center"
+            marginBottom={2}
+
           >
             <Button
               variant={activeView === "table" ? "contained" : "outlined"}
@@ -74,6 +68,15 @@ function App() {
               Graph Based on Description
             </Button>
           </Stack>
+          {/* Aktif component gösterimi */}
+          <Box mb={3}>
+            {activeView === "table" && <HarmfulContentTable />}
+            {activeView === "ip" && <IPRangeGenerator />}
+            {activeView === "chart" && <ChartForAdresses />}
+          </Box>
+
+          {/* Buton grubu */}
+ 
         </Paper>
       </Container>
     </ThemeProvider>
@@ -82,13 +85,8 @@ function App() {
 
 export default App;
 
-
-
-
-
-
-
-{/* // eslint-disable-next-line no-unused-vars
+{
+  /* // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import "./App.scss";
 import FoxWithButtons from "./components/FoxAndButtons/FoxWithButtons";
@@ -161,4 +159,5 @@ function App() {
 }
 
 export default App;
-*/}
+*/
+}
