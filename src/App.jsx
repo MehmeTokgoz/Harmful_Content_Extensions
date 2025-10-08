@@ -32,16 +32,14 @@ function App() {
       <CssBaseline />
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <Paper elevation={3} sx={{ p: 3, borderRadius: 3 }}>
-
           <Box display="flex" justifyContent="center" mb={3}>
             <FoxWithButtons />
           </Box>
-                   <Stack
+          <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
             justifyContent="center"
             marginBottom={2}
-
           >
             <Button
               variant={activeView === "table" ? "contained" : "outlined"}
@@ -76,7 +74,6 @@ function App() {
           </Box>
 
           {/* Buton grubu */}
- 
         </Paper>
       </Container>
     </ThemeProvider>

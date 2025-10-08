@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import "./IPRangeGenerator.scss";
+import { Button, Input } from "@mui/material";
 
 function IPRangeGenerator() {
   const [ipAddress, setIPAddress] = useState("");
@@ -44,16 +45,16 @@ function IPRangeGenerator() {
     <div className="ip-table-container">
       {errorMessage && <div className="error-message">{errorMessage}</div>}
 
-      <input
+      <Input
         className="ip-input-box"
         type="text"
         value={ipAddress}
         placeholder="Enter IP address"
         onChange={handleIPChange}
       />
-      <button className="ip-generate-button" onClick={generateIPRange}>
+      <Button color="secondary" variant="outlined" onClick={generateIPRange} sx={{height: 54}}>
         Generate
-      </button>
+      </Button>
 
       <div className="generate-result-container">
         <table className="table-container">
@@ -90,9 +91,8 @@ function IPRangeGenerator() {
 
 export default IPRangeGenerator;
 
-
-
-{/** 
+{
+  /** 
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import "./IPRangeGenerator.scss";
@@ -202,4 +202,5 @@ function IPRangeGenerator() {
   );
 }
 export default IPRangeGenerator;
-*/}
+*/
+}
